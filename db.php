@@ -4,9 +4,9 @@ function connectDB() {
     if ($pdo === null) {
 
         $host = 'localhost';
-        $db   = 'lab3';
-        $user = 'root';
-        $pass = '';
+        $db   = 'u82683';
+        $user = 'u82683';
+        $pass = '1511698';
 
         try {
             $pdo = new PDO(
