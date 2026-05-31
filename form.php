@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+
+    <!-- Кодировка -->
     <meta charset="UTF-8">
+
+    <!-- Адаптация под мобильные устройства -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Лабораторная работа №3</title>
 
+    <!-- Подключение CSS -->
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -17,6 +24,8 @@
         Выполнил: Сладкомедов Ярослав, ПМИ 23
     </p>
 
+    <!-- Сообщение об успешном сохранении -->
+
     <?php if (!empty($successMessage)): ?>
 
         <div class="success">
@@ -24,6 +33,8 @@
         </div>
 
     <?php endif; ?>
+
+    <!-- Вывод ошибок -->
 
     <?php if (!empty($formErrors)): ?>
 
@@ -43,7 +54,11 @@
 
     <?php endif; ?>
 
+    <!-- Начало формы -->
+
     <form method="POST" action="">
+
+        <!-- ФИО -->
 
         <label for="full_name">ФИО</label>
 
@@ -54,6 +69,8 @@
             required
         >
 
+        <!-- Телефон -->
+
         <label for="phone">Телефон</label>
 
         <input
@@ -62,6 +79,8 @@
             name="phone"
             required
         >
+
+        <!-- Email -->
 
         <label for="email">E-mail</label>
 
@@ -72,6 +91,8 @@
             required
         >
 
+        <!-- Дата рождения -->
+
         <label for="birth_date">Дата рождения</label>
 
         <input
@@ -81,30 +102,40 @@
             required
         >
 
+        <!-- Пол -->
+
         <label>Пол</label>
 
         <div class="radio-group">
 
             <label>
+
                 <input
                     type="radio"
                     name="gender"
                     value="male"
                     required
                 >
+
                 Мужской
+
             </label>
 
             <label>
+
                 <input
                     type="radio"
                     name="gender"
                     value="female"
                 >
+
                 Женский
+
             </label>
 
         </div>
+
+        <!-- Любимые языки программирования -->
 
         <label for="languages">
             Любимые языки программирования
@@ -116,6 +147,8 @@
             multiple
             required
         >
+
+            <!-- Вывод языков из БД -->
 
             <?php foreach ($languages as $language): ?>
 
@@ -129,6 +162,8 @@
 
         </select>
 
+        <!-- Биография -->
+
         <label for="biography">Биография</label>
 
         <textarea
@@ -136,6 +171,8 @@
             name="biography"
             rows="6"
         ></textarea>
+
+        <!-- Чекбокс согласия -->
 
         <div class="checkbox">
 
@@ -152,6 +189,8 @@
 
         </div>
 
+        <!-- Кнопка отправки -->
+
         <button type="submit">
 
             Сохранить
@@ -159,6 +198,8 @@
         </button>
 
     </form>
+
+    <!-- Ссылка на просмотр анкет -->
 
     <div class="links">
 

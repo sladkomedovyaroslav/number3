@@ -1,13 +1,19 @@
 <?php
 
+// Подключаем БД
 require 'db.php';
 
+// Получаем соединение
 $pdo = connectDB();
 
+// Получаем все анкеты вместе с языками программирования
 $stmt = $pdo->query("
-    SELECT 
+    SELECT
         a.*,
+
+        -- Собираем языки в одну строку
         GROUP_CONCAT(pl.name SEPARATOR ', ') AS languages
+
     FROM applications a
 
     LEFT JOIN application_languages al
@@ -21,6 +27,7 @@ $stmt = $pdo->query("
     ORDER BY a.id DESC
 ");
 
+// Получаем все записи
 $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
@@ -28,11 +35,16 @@ $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Сохраненные анкеты</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -44,11 +56,15 @@ $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
         Выполнил: Сладкомедов Ярослав, ПМИ 23
     </p>
 
+    <!-- Если анкет нет -->
+
     <?php if (empty($applications)): ?>
 
         <p>Анкет пока нет.</p>
 
     <?php else: ?>
+
+        <!-- Таблица с данными -->
 
         <table>
 
@@ -64,6 +80,8 @@ $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <th>Языки</th>
                 <th>Дата создания</th>
             </tr>
+
+            <!-- Перебираем все анкеты -->
 
             <?php foreach ($applications as $app): ?>
 
@@ -90,23 +108,39 @@ $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </td>
 
                     <td>
-                        <?= $app['gender'] === 'male' ? 'Мужской' : 'Женский' ?>
+
+                        <?= $app['gender'] === 'male'
+                            ? 'Мужской'
+                            : 'Женский' ?>
+
                     </td>
 
                     <td>
-                        <?= nl2br(htmlspecialchars($app['biography'])) ?>
+
+                        <?= nl2br(
+                            htmlspecialchars($app['biography'])
+                        ) ?>
+
                     </td>
 
                     <td>
-                        <?= $app['agreement'] ? 'Да' : 'Нет' ?>
+
+                        <?= $app['agreement']
+                            ? 'Да'
+                            : 'Нет' ?>
+
                     </td>
 
                     <td>
+
                         <?= htmlspecialchars($app['languages']) ?>
+
                     </td>
 
                     <td>
+
                         <?= htmlspecialchars($app['created_at']) ?>
+
                     </td>
 
                 </tr>
@@ -117,10 +151,14 @@ $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <?php endif; ?>
 
+    <!-- Ссылка назад -->
+
     <div class="links">
 
         <a href="index.php">
+
             Вернуться к форме
+
         </a>
 
     </div>
@@ -129,5 +167,3 @@ $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </body>
 </html>
-
-?>
